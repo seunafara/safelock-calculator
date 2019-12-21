@@ -37,9 +37,15 @@ var name_of_month = month[y2k.getMonth()];
 var savings_month =
   y2k.getDate() + ' ' + name_of_month + ' ' + y2k.getFullYear();
 
+// add h1 content
 var saying = (document.getElementById(
   'savings-name'
 ).innerHTML = `How Much Will You Have By ${savings_month} If You Save With Us?🤔🚀`);
+
+// add commas to numbers
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
 
 // init cal-again button
 const cal_again = document.getElementById('cal-again');
@@ -94,9 +100,19 @@ function calculateResults() {
   const daily = principal + calculatedInterest;
 
   if (isFinite(daily)) {
-    futureValue.value = daily.toFixed(2);
+    futureValue.value =
+      '₦' +
+      daily
+        .toFixed(2)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     // totalPayment.value = principal;
-    totalInterest.value = calculatedInterest.toFixed(2);
+    totalInterest.value =
+      '₦' +
+      calculatedInterest
+        .toFixed(2)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
     // Show Results
     document.getElementById('results').style.display = 'block';
